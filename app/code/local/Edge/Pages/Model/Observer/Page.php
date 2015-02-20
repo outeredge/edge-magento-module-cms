@@ -29,26 +29,21 @@ class Edge_Pages_Model_Observer_Page
                 $uploader->setFilesDispersion(false);
 
                 $dirPath  = Mage::getBaseDir('media') . DS . 'page' . DS;
-                $result = $uploader->save($dirPath . $_FILES['image']['name']);
+                $result = $uploader->save($dirPath, $_FILES['image']['name']);
                 Mage::helper('core/file_storage_database')->saveFile($dirPath . $result['file']);
 
             } catch (Exception $e) {
                 Mage::log($e->getMessage());
             }
 
-            $model->setImage('banner/' . $result['file']);
+            $model->setImage('page/' . $result['file']);
         }
         else {
             $data = $request->getPost();
             if (isset($data['image']) && isset($data['image']['delete']) && $data['image']['delete'] == 1) {
                 $model->setImage(false);
-            } else {
-//                unset($data['banner']);
-//                $banner = $request->getPost('banner');
-//                if (is_array($banner)) {
-//                    $banner = implode($banner);
-//                }
-//                $model->setBanner($banner);
+            } elseif (is_array($data['image'])) {
+                $model->setImage($data['image']['value']);
             }
         }
     }
