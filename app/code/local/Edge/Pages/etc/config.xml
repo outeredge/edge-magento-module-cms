@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Edge_Pages>
+            <version>1.0.0</version>
+        </Edge_Pages>
+    </modules>
+    <global>
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <cms_page_edit_form>Edge_Pages_Block_Adminhtml_Cms_Page_Edit_Form</cms_page_edit_form>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <events>
+            <cms_page_prepare_save>
+                <observers>
+                    <edge_pages_save_image>
+                        <class>Edge_Pages_Model_Observer_Page</class>
+                        <method>saveImage</method>
+                    </edge_pages_save_image>
+                </observers>
+            </cms_page_prepare_save>
+            <adminhtml_cms_page_edit_tab_content_prepare_form>
+                <observers>
+                    <edge_pages_image_field>
+                        <class>Edge_Pages_Model_Observer_Page</class>
+                        <method>pageFields</method>
+                    </edge_pages_image_field>
+                </observers>
+            </adminhtml_cms_page_edit_tab_content_prepare_form>
+        </events>
+        <resources>
+            <pages_setup>
+                <setup>
+                    <module>Edge_Pages</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </pages_setup>
+        </resources>
+    </global>
+</config>
