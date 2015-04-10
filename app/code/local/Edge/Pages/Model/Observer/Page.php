@@ -42,7 +42,7 @@ class Edge_Pages_Model_Observer_Page
             $data = $request->getPost();
             if (isset($data['image']) && isset($data['image']['delete']) && $data['image']['delete'] == 1) {
                 $model->setImage(false);
-            } elseif (is_array($data['image'])) {
+            } elseif (isset($data['image']) && is_array($data['image'])) {
                 $model->setImage($data['image']['value']);
             }
         }
