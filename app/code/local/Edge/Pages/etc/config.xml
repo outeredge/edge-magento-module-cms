@@ -7,12 +7,20 @@
     </modules>
     <global>
         <blocks>
+            <pages>
+                <class>Edge_Pages_Block</class>
+            </pages>
             <adminhtml>
                 <rewrite>
                     <cms_page_edit_form>Edge_Pages_Block_Adminhtml_Cms_Page_Edit_Form</cms_page_edit_form>
                 </rewrite>
             </adminhtml>
         </blocks>
+        <helpers>
+            <pages>
+                <class>Edge_Pages_Helper</class>
+            </pages>
+        </helpers>
         <events>
             <cms_page_prepare_save>
                 <observers>
