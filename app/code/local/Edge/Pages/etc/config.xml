@@ -2,9 +2,29 @@
 <config>
     <modules>
         <Edge_Pages>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </Edge_Pages>
     </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <pages before="Mage_Adminhtml">Edge_Pages_Adminhtml</pages>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <pages>
+                    <file>edge/pages.xml</file>
+                </pages>
+            </updates>
+        </layout>
+    </adminhtml>
     <global>
         <blocks>
             <pages>
@@ -16,29 +36,25 @@
                 </rewrite>
             </adminhtml>
         </blocks>
+        <models>
+            <pages>
+                <class>Edge_Pages_Model</class>
+                <resourceModel>pages_resource</resourceModel>
+            </pages>
+            <pages_resource>
+                <class>Edge_Pages_Model_Resource</class>
+                <entities>
+                    <page_type>
+                        <table>cms_page_type</table>
+                    </page_type>
+                </entities>
+            </pages_resource>
+        </models>
         <helpers>
             <pages>
                 <class>Edge_Pages_Helper</class>
             </pages>
         </helpers>
-        <events>
-            <cms_page_prepare_save>
-                <observers>
-                    <edge_pages_save_image>
-                        <class>Edge_Pages_Model_Observer_Page</class>
-                        <method>saveImage</method>
-                    </edge_pages_save_image>
-                </observers>
-            </cms_page_prepare_save>
-            <adminhtml_cms_page_edit_tab_content_prepare_form>
-                <observers>
-                    <edge_pages_image_field>
-                        <class>Edge_Pages_Model_Observer_Page</class>
-                        <method>pageFields</method>
-                    </edge_pages_image_field>
-                </observers>
-            </adminhtml_cms_page_edit_tab_content_prepare_form>
-        </events>
         <resources>
             <pages_setup>
                 <setup>
@@ -49,6 +65,36 @@
                     <use>core_setup</use>
                 </connection>
             </pages_setup>
+        </resources>
+        <events>
+            <adminhtml_cms_page_edit_tab_main_prepare_form>
+                <observers>
+                    <pagetype_page_edit_tab_main>
+                        <type>singleton</type>
+                        <class>Edge_Pages_Model_Observer</class>
+                        <method>cmsField</method>
+                    </pagetype_page_edit_tab_main>
+                </observers>
+            </adminhtml_cms_page_edit_tab_main_prepare_form>
+            <cms_page_prepare_save>
+                 <observers>
+                    <pagetype_page_edit_tab_main_save_edit>
+                        <type>singleton</type>
+                        <class>Edge_Pages_Model_Observer</class>
+                        <method>saveEditField</method>
+                    </pagetype_page_edit_tab_main_save_edit>
+                </observers>
+            </cms_page_prepare_save>
+        </events>
+        <resources>
+            <pagetype_setup>
+                <setup>
+                    <module>Edge_Pages</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </pagetype_setup>
         </resources>
     </global>
 </config>
