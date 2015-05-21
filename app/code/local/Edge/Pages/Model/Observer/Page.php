@@ -37,8 +37,7 @@ class Edge_Pages_Model_Observer_Page
             }
 
             $model->setImage('page/' . $result['file']);
-        }
-        else {
+        } else {
             $data = $request->getPost();
             if (isset($data['image']) && isset($data['image']['delete']) && $data['image']['delete'] == 1) {
                 $model->setImage(false);
