@@ -15,6 +15,7 @@
     "extra": {
         "map": [
             ["app/code/local/Edge/Pages", "app/code/local/Edge/Pages"],
+            ["app/design/adminhtml/default/default/template/layout/edge/pages.xml", "app/design/adminhtml/default/default/template/layout/edge/pages.xml"],
             ["app/design/frontend/base/default/template/edge/pages", "app/design/frontend/base/default/template/edge/pages"],
             ["app/etc/modules/Edge_Pages.xml", "app/etc/modules/Edge_Pages.xml"]
         ]
