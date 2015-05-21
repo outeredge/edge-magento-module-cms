@@ -2,7 +2,7 @@
 class Edge_Pages_Block_Adminhtml_Cms_Page_Type_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
     /**
-     * Initialize slideshow edit block
+     * Initialize pagetype edit block
      * @return void
      */
     public function __construct()
