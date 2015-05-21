@@ -5,7 +5,7 @@ class Edge_Pages_Block_Adminhtml_Cms_Page_Type_Edit_Form extends Mage_Adminhtml_
     protected function _prepareForm()
     {
         /** @var $model Edge_Pages_Model_Page */
-        $model = Mage::registry('pages');
+        $model = Mage::registry('page_type');
         $form = new Varien_Data_Form(array(
             'id'      => 'edit_form',
             'action'  => $this->getData('action'),
@@ -18,7 +18,7 @@ class Edge_Pages_Block_Adminhtml_Cms_Page_Type_Edit_Form extends Mage_Adminhtml_
             'legend' => Mage::helper('cms')->__('Content'),
             'class'  => 'fieldset-wide'
         ));
-        
+
         if ($model->getId()) {
             $fieldset->addField('id', 'hidden', array('name' => 'id'));
         }

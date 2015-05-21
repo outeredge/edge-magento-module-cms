@@ -51,7 +51,7 @@ class Edge_Pages_Adminhtml_Cms_Page_TypeController extends Mage_Adminhtml_Contro
         }
 
         // 4. Register model to use later in blocks
-        Mage::register('pages', $model);
+        Mage::register('page_type', $model);
 
         // 5. Build edit form
         $this->_initAction()
