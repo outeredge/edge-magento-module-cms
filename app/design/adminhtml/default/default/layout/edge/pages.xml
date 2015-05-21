@@ -2,18 +2,17 @@
 <layout>
     <adminhtml_cms_page_type_index>
         <reference name="content">
-            <block type="pages/adminhtml_cms_page_type" name="type"></block>
+            <block type="pages/adminhtml_cms_page_type" name="type"/>
         </reference>
     </adminhtml_cms_page_type_index>
 
     <adminhtml_cms_page_type_new>
-        <update handle="adminhtml_cms_page_type_edit" />
+        <update handle="adminhtml_cms_page_type_edit"/>
     </adminhtml_cms_page_type_new>
 
     <adminhtml_cms_page_type_edit>
-        <update handle="editor"/>
         <reference name="content">
-            <block type="pages/adminhtml_cms_page_type_edit" name="type_edit"></block>
+            <block type="pages/adminhtml_cms_page_type_edit" name="type_edit"/>
         </reference>
     </adminhtml_cms_page_type_edit>
 </layout>

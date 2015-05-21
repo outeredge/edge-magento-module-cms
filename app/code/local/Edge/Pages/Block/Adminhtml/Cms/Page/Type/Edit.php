@@ -1,4 +1,5 @@
 <?php
+
 class Edge_Pages_Block_Adminhtml_Cms_Page_Type_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
     /**
@@ -11,19 +12,20 @@ class Edge_Pages_Block_Adminhtml_Cms_Page_Type_Edit extends Mage_Adminhtml_Block
         $this->_controller = 'adminhtml_cms_page_type';
         $this->_blockGroup = 'pages';
         parent::__construct();
-        $this->_updateButton('save', 'label', Mage::helper('pages')->__('Save Page Type'));
+        $this->_updateButton('save', 'label', Mage::helper('page_type')->__('Save Page Type'));
         $this->_addButton('saveandcontinue', array(
             'label'     => Mage::helper('adminhtml')->__('Save and Continue Edit'),
             'onclick'   => 'saveAndContinueEdit()',
             'class'     => 'save',
         ), -100);
-        $this->_updateButton('delete', 'label', Mage::helper('pages')->__('Delete Page Type'));
+        $this->_updateButton('delete', 'label', Mage::helper('page_type')->__('Delete Page Type'));
         $this->_formScripts[] = "
             function saveAndContinueEdit(){
                 editForm.submit($('edit_form').action+'back/edit/');
             }
         ";
     }
+
     /**
      * Retrieve text for header element depending on loaded page
      * @return string
@@ -37,6 +39,7 @@ class Edge_Pages_Block_Adminhtml_Cms_Page_Type_Edit extends Mage_Adminhtml_Block
             return Mage::helper('pages')->__('New Page Type');
         }
     }
+
     /**
      * Get form action URL
      * @return string

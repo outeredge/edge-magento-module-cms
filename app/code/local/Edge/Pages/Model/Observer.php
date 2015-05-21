@@ -10,19 +10,10 @@ class Edge_Pages_Model_Observer
             'class'  => 'fieldset-wide'
         ));
 
-        $pagestypeCollection = Mage::getModel('pages/page_type')->getCollection();
-
-        $menuItems[] = array('value' => NULL,'label' => '',);
-
-        foreach($pagestypeCollection as $type)
-        {
-            if($type->getParent == NULL){
-                $menuItems[] = array(
-                          'value' => $type->getId(),
-                          'label' => $type->getName(),
-                      );
-            }
-        }
+        $menuItems = array_merge(
+            [['value' => NULL,'label' => '']],
+            Mage::getModel('pages/page_type')->getCollection()->toOptionArray()
+        );
 
         $fieldset->addField('page_type', 'select', array(
             'name' => 'page_type',
@@ -37,9 +28,8 @@ class Edge_Pages_Model_Observer
     {
         $modelPage = $observer->getEvent()->getPage();
 
-        if(empty($modelPage->getPageType())){
+        if (empty($modelPage->getPageType())) {
             $modelPage->setPageType(NULL);
         }
     }
 }
-

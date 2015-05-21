@@ -87,14 +87,14 @@
             </cms_page_prepare_save>
         </events>
         <resources>
-            <pagetype_setup>
+            <pages_setup>
                 <setup>
                     <module>Edge_Pages</module>
                 </setup>
                 <connection>
                     <use>core_setup</use>
                 </connection>
-            </pagetype_setup>
+            </pages_setup>
         </resources>
     </global>
 </config>

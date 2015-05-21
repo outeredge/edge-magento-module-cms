@@ -10,23 +10,28 @@ class Edge_Pages_Adminhtml_Cms_Page_TypeController extends Mage_Adminhtml_Contro
             ->_setActiveMenu('edge');
         return $this;
     }
+
     public function indexAction()
     {
         $this->_initAction();
         $this->renderLayout();
     }
+
     public function newAction()
     {
         $this->_forward('edit');
     }
+
     public function editAction()
     {
         $this->_title($this->__('PageType'))
              ->_title($this->__('Types'))
              ->_title($this->__('Manage Content'));
+
         // 1. Get ID and create model
         $id = $this->getRequest()->getParam('pagetype_id');
         $model = Mage::getModel('pages/page_type');
+
         // 2. Initial checking
         if ($id) {
             $model->load($id);
@@ -38,13 +43,16 @@ class Edge_Pages_Adminhtml_Cms_Page_TypeController extends Mage_Adminhtml_Contro
             }
         }
         $this->_title($model->getId() ? $model->getTitle() : $this->__('New Slide'));
+
         // 3. Set entered data if was error when we do save
         $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
         if (! empty($data)) {
             $model->setData($data);
         }
+
         // 4. Register model to use later in blocks
         Mage::register('pages', $model);
+
         // 5. Build edit form
         $this->_initAction()
              ->_addBreadcrumb(
@@ -55,20 +63,15 @@ class Edge_Pages_Adminhtml_Cms_Page_TypeController extends Mage_Adminhtml_Contro
 
         $this->renderLayout();
     }
+
     public function saveAction()
     {
         // check if data sent
         if ($data = $this->getRequest()->getPost()) {
-            if (!empty($_FILES)) {
-                foreach ($_FILES as $name=>$fileData) {
-                        $data[$name] = $data[$name]['value'];
-                }
-            }
+
             //init model and set data
             $model = Mage::getModel('pages/page_type');
             $model->setData($data);
-
-            Mage::log($model->getData());
 
             // try to save it
             try {
@@ -100,6 +103,7 @@ class Edge_Pages_Adminhtml_Cms_Page_TypeController extends Mage_Adminhtml_Contro
         }
         $this->_redirect('*/*/');
     }
+
     public function deleteAction()
     {
         // check if we know what should be deleted
@@ -126,7 +130,7 @@ class Edge_Pages_Adminhtml_Cms_Page_TypeController extends Mage_Adminhtml_Contro
             }
         }
         // display error message
-        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('slideshow')->__('Unable to find a page type to delete.'));
+        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('pages')->__('Unable to find a page type to delete.'));
         // go to grid
         $this->_redirect('*/*/');
     }
