@@ -2,7 +2,33 @@
 
 class Edge_Pages_Model_Observer_Page
 {
-    public function pageFields($observer)
+    public function pageTypeField(Varien_Event_Observer $observer)
+    {
+        $model = Mage::registry('cms_page');
+        $form = $observer->getEvent()->getForm();
+
+        $pageTypeFieldset = $form->addFieldset('pagetype_fieldset', array(
+            'legend' => Mage::helper('adminhtml')->__('Page Type'),
+            'class'  => 'fieldset-wide'
+        ));
+
+        $menuItems = array_merge(
+            [['value' => null, 'label' => '']],
+            Mage::getModel('pages/page_type')->getCollection()->toOptionArray()
+        );
+
+        $pageTypeFieldset->addField('page_type', 'select', array(
+            'name' => 'page_type',
+            'label' => Mage::helper('adminhtml')->__('Page Type'),
+            'title' => Mage::helper('adminhtml')->__('Page Type'),
+            'required'  => false,
+            'values'    => $menuItems
+        ));
+
+        $form->setValues($model->getData());
+    }
+
+    public function imageField(Varien_Event_Observer $observer)
     {
         $model = Mage::registry('cms_page');
         $form = $observer->getEvent()->getForm();
@@ -16,7 +42,7 @@ class Edge_Pages_Model_Observer_Page
         $form->setValues($model->getData());
     }
 
-    public function saveImage(Varien_Event_Observer $observer)
+    public function saveFields(Varien_Event_Observer $observer)
     {
         $model = $observer->getEvent()->getPage();
         $request = $observer->getEvent()->getRequest();
@@ -44,6 +70,10 @@ class Edge_Pages_Model_Observer_Page
             } elseif (isset($data['image']) && is_array($data['image'])) {
                 $model->setImage($data['image']['value']);
             }
+        }
+
+        if (empty($model->getPageType())) {
+            $model->setPageType(null);
         }
     }
 }

@@ -70,18 +70,24 @@
             <adminhtml_cms_page_edit_tab_main_prepare_form>
                 <observers>
                     <pagetype_page_edit_tab_main>
-                        <type>singleton</type>
-                        <class>Edge_Pages_Model_Observer</class>
-                        <method>cmsField</method>
+                        <class>Edge_Pages_Model_Observer_Page</class>
+                        <method>pageTypeField</method>
                     </pagetype_page_edit_tab_main>
                 </observers>
             </adminhtml_cms_page_edit_tab_main_prepare_form>
+            <adminhtml_cms_page_edit_tab_content_prepare_form>
+                <observers>
+                    <edge_pages_image_field>
+                        <class>Edge_Pages_Model_Observer_Page</class>
+                        <method>imageField</method>
+                    </edge_pages_image_field>
+                </observers>
+            </adminhtml_cms_page_edit_tab_content_prepare_form>
             <cms_page_prepare_save>
                  <observers>
                     <pagetype_page_edit_tab_main_save_edit>
-                        <type>singleton</type>
-                        <class>Edge_Pages_Model_Observer</class>
-                        <method>saveEditField</method>
+                        <class>Edge_Pages_Model_Observer_Page</class>
+                        <method>saveFields</method>
                     </pagetype_page_edit_tab_main_save_edit>
                 </observers>
             </cms_page_prepare_save>
