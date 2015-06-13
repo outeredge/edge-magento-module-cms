@@ -49,7 +49,7 @@ class Edge_Pages_Model_Observer_Page
 
         if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != '') {
             try {
-                $uploader = new Varien_File_Uploader('image');
+                $uploader = new Mage_Core_Model_File_Uploader('image');
                 $uploader->setAllowedExtensions(array('jpg','jpeg','gif','png'));
                 $uploader->setAllowRenameFiles(true);
                 $uploader->setFilesDispersion(false);
