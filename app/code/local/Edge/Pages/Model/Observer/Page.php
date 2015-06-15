@@ -49,14 +49,13 @@ class Edge_Pages_Model_Observer_Page
 
         if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != '') {
             try {
-                $uploader = new Varien_File_Uploader('image');
+                $uploader = new Mage_Core_Model_File_Uploader('image');
                 $uploader->setAllowedExtensions(array('jpg','jpeg','gif','png'));
                 $uploader->setAllowRenameFiles(true);
                 $uploader->setFilesDispersion(false);
 
                 $dirPath  = Mage::getBaseDir('media') . DS . 'page' . DS;
                 $result = $uploader->save($dirPath, $_FILES['image']['name']);
-                Mage::helper('core/file_storage_database')->saveFile($dirPath . $result['file']);
 
             } catch (Exception $e) {
                 Mage::log($e->getMessage());
