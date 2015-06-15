@@ -56,7 +56,6 @@ class Edge_Pages_Model_Observer_Page
 
                 $dirPath  = Mage::getBaseDir('media') . DS . 'page' . DS;
                 $result = $uploader->save($dirPath, $_FILES['image']['name']);
-                Mage::helper('core/file_storage_database')->saveFile($dirPath . $result['file']);
 
             } catch (Exception $e) {
                 Mage::log($e->getMessage());
