@@ -17,10 +17,10 @@
                 <children>
                     <cms>
                         <children>
-                            <team translate="title">
-                                <title>Team</title>
+                            <page_type translate="title">
+                                <title>Page Type</title>
                                 <sort_order>10</sort_order>
-                            </team>
+                            </page_type>
                         </children>
                     </cms>
                 </children>
