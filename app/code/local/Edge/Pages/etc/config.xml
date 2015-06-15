@@ -103,4 +103,13 @@
             </pages_setup>
         </resources>
     </global>
+    <default>
+        <system>
+            <media_storage_configuration>
+                <allowed_resources>
+                    <page_image_folder>page</page_image_folder>
+                </allowed_resources>
+            </media_storage_configuration>
+        </system>
+    </default>
 </config>
