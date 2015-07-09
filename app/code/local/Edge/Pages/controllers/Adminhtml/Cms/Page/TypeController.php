@@ -2,6 +2,11 @@
 
 class Edge_Pages_Adminhtml_Cms_Page_TypeController extends Mage_Adminhtml_Controller_Action
 {
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('cms/page_type');
+    }
+    
     protected function _initAction()
     {
         $this->loadLayout()
