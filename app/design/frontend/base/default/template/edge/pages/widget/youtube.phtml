@@ -1,0 +1,5 @@
+<div class="youtube-video <?php echo $this->getClass() ? $this->getClass() : 'youtube-' . $this->getCode() ?>">
+    <div class="youtube-container" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+        <iframe src="//youtube.com/embed/<?php echo $this->getCode() ?>" width="<?php echo $this->getWidth() ?>" height="<?php echo $this->getHeight() ?>" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+    </div>
+</div>
