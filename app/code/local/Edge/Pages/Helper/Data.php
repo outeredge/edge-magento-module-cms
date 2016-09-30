@@ -9,6 +9,7 @@ class Edge_Pages_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getModel('cms/page')
             ->getCollection()
             ->addStoreFilter(Mage::app()->getStore())
+            ->addFieldToFilter('is_active', 1)
             ->addFieldToFilter('page_type', array('eq' => $pageType->getId()));
     }
 }
