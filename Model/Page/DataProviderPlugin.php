@@ -5,12 +5,18 @@ namespace OuterEdge\Page\Model\Page;
 class DataProviderPlugin
 {
     /**
-     * Construct
+     * Store manager
      *
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    protected $_storeManager;
+
+    /**
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      */
-    public function __construct(\Magento\Store\Model\StoreManagerInterface $storeManager)
-    {
+    public function __construct(
+        \Magento\Store\Model\StoreManagerInterface $storeManager
+    ) {
         $this->_storeManager = $storeManager;
     }
 
