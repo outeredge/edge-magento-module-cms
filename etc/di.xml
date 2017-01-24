@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="OuterEdge\Page\ImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">page/tmp/image</argument>
+            <argument name="basePath" xsi:type="string">page/image</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+                <item name="svg" xsi:type="string">svg</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="OuterEdge\Page\Controller\Adminhtml\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">OuterEdge\Page\ImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Cms\Controller\Adminhtml\Page\PostDataProcessor">
+        <plugin name="OuterEdge_Page::cmsPagePostDataProcessorPlugin" type="OuterEdge\Page\Controller\Adminhtml\Page\PostDataProcessorPlugin" sortOrder="1"/>
+    </type>
+    <type name="Magento\Cms\Model\Page\DataProvider">
+        <plugin name="OuterEdge_Page::cmsPageDataProviderPlugin" type="OuterEdge\Page\Model\Page\DataProviderPlugin" sortOrder="1"/>
+    </type>
+</config>
