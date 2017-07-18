@@ -22,18 +22,20 @@ class DataProviderPlugin
 
     public function afterGetData(\Magento\Cms\Model\Page\DataProvider $subject, $loadedData)
     {
-        foreach ($loadedData as $pageId => $pageData) {
-            foreach (['primary_image', 'secondary_image', 'tertiary_image'] as $image) {
-                if (isset($pageData[$image]) && is_string($pageData[$image])) {
+        if (!empty($loadedData)) {
+            foreach ($loadedData as $pageId => $pageData) {
+                foreach (['primary_image', 'secondary_image', 'tertiary_image'] as $image) {
+                    if (isset($pageData[$image]) && is_string($pageData[$image])) {
 
-                    $url = $this->_storeManager->getStore()->getBaseUrl(
-                        \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
-                    ) . 'page/image/' . $pageData[$image];
+                        $url = $this->_storeManager->getStore()->getBaseUrl(
+                            \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+                        ) . 'page/image/' . $pageData[$image];
 
-                    $loadedData[$pageId][$image] = array(array(
-                        'name' => $pageData[$image],
-                        'url' => $url
-                    ));
+                        $loadedData[$pageId][$image] = array(array(
+                            'name' => $pageData[$image],
+                            'url' => $url
+                        ));
+                    }
                 }
             }
         }
