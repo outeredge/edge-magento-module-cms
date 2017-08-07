@@ -1,10 +1,13 @@
-# Magento Page Module
+outer/edge Magento Page Module
+============================================
+
+
+[![Build Status](https://travis-ci.org/outeredge/magento-page-module.svg?branch=master)](https://travis-ci.org/outeredge/magento-page-module)
+
 
 Advice is to override the core Magento `cms_page_view.xml` in the following location.
 
 `app/design/frontend/[Vendor_Theme]/Magento_Cms/layout/override/base/cms_page_view.xml`
-
-With the following content.
 
 ```
 <?xml version="1.0"?>
