@@ -1,6 +1,11 @@
-FROM outeredge/edge-docker-php:7.1.7
+FROM outeredge/edge-docker-php:7.0.21
+
+RUN echo "extension=mcrypt.so" >> /usr/local/etc/php/conf.d/magento.ini && \
+    echo "extension=gd.so" >> /usr/local/etc/php/conf.d/magento.ini && \
+    echo "extension=xsl.so" >> /usr/local/etc/php/conf.d/magento.ini
 
 COPY composer.* /var/www/
+COPY *.json /var/www/
 
 RUN composer install --no-interaction --no-autoloader --prefer-dist
 
