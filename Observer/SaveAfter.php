@@ -3,13 +3,15 @@
 namespace OuterEdge\Page\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Catalog\Model\ImageUploader;
+use Magento\Framework\Event\Observer;
+use Magento\Framework\App\ObjectManager;
+use Exception;
 
 class SaveAfter implements ObserverInterface
 {
     /**
-     * Image uploader
-     *
-     * @var \Magento\Catalog\Model\ImageUploader
+     * @var ImageUploader
      */
     private $imageUploader;
 
@@ -17,10 +19,10 @@ class SaveAfter implements ObserverInterface
      * Moving page images from tmp folder
      * Saving images which haven't changed
      *
-     * @param \Magento\Framework\Event\Observer $observer
+     * @param Observer $observer
      * @return $this
      */
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(Observer $observer)
     {
         $page = $observer->getEvent()->getDataObject();
 
@@ -42,7 +44,7 @@ class SaveAfter implements ObserverInterface
     private function getImageUploader()
     {
         if (null === $this->imageUploader) {
-            $this->imageUploader = \Magento\Framework\App\ObjectManager::getInstance()->get('OuterEdge\Page\ImageUpload');
+            $this->imageUploader = ObjectManager::getInstance()->get('OuterEdge\Page\ImageUpload');
         }
         return $this->imageUploader;
     }

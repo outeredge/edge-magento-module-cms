@@ -1,40 +1,41 @@
 <?php
 
-namespace OuterEdge\Page\Model\Page;
+namespace OuterEdge\Page\Plugin\Cms\Model\Page;
 
-class DataProviderPlugin
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Cms\Model\Page\DataProvider as PageDataProvider;
+use Magento\Framework\UrlInterface;
+
+class DataProvider
 {
     /**
-     * Store manager
-     *
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var StoreManagerInterface
      */
     protected $_storeManager;
 
     /**
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager
     ) {
         $this->_storeManager = $storeManager;
     }
 
-    public function afterGetData(\Magento\Cms\Model\Page\DataProvider $subject, $loadedData)
+    public function afterGetData(PageDataProvider $subject, $loadedData)
     {
         if (!empty($loadedData)) {
             foreach ($loadedData as $pageId => $pageData) {
                 foreach (['primary_image', 'secondary_image', 'tertiary_image'] as $image) {
                     if (isset($pageData[$image]) && is_string($pageData[$image])) {
-
                         $url = $this->_storeManager->getStore()->getBaseUrl(
-                            \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+                            UrlInterface::URL_TYPE_MEDIA
                         ) . 'page/image/' . $pageData[$image];
 
-                        $loadedData[$pageId][$image] = array(array(
+                        $loadedData[$pageId][$image] = [[
                             'name' => $pageData[$image],
                             'url' => $url
-                        ));
+                        ]];
                     }
                 }
             }

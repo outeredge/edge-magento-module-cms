@@ -2,55 +2,56 @@
 
 namespace OuterEdge\Page\Block;
 
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\DataObject\IdentityInterface;
+use Magento\Cms\Model\Template\FilterProvider;
+use Magento\Cms\Model\Page as CmsPage;
+use Magento\Cms\Model\PageFactory;
+use Magento\Framework\View\Element\Template\Context;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\Exception\LocalizedException;
 
-class Page extends \Magento\Framework\View\Element\Template implements
-    \Magento\Framework\DataObject\IdentityInterface
+class Page extends Template implements IdentityInterface
 {
     /**
-     * @var \Magento\Cms\Model\Template\FilterProvider
+     * @var FilterProvider
      */
     protected $_filterProvider;
 
     /**
-     * @var \Magento\Cms\Model\Page
+     * @var CmsPage
      */
     protected $_page;
 
     /**
-     * Page factory
-     *
-     * @var \Magento\Cms\Model\PageFactory
+     * @var PageFactory
      */
     protected $_pageFactory;
 
     /**
-     * Construct
-     *
-     * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Magento\Cms\Model\Page $page
-     * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
-     * @param \Magento\Cms\Model\PageFactory $pageFactory
+     * @param Context $context
+     * @param CmsPage $page
+     * @param FilterProvider $filterProvider
+     * @param PageFactory $pageFactory
      * @param array $data
      */
     public function __construct(
-        \Magento\Framework\View\Element\Template\Context $context,
-        \Magento\Cms\Model\Page $page,
-        \Magento\Cms\Model\Template\FilterProvider $filterProvider,
-        \Magento\Cms\Model\PageFactory $pageFactory,
+        Context $context,
+        CmsPage $page,
+        FilterProvider $filterProvider,
+        PageFactory $pageFactory,
         array $data = []
     ) {
-        parent::__construct($context, $data);
-        // used singleton (instead factory) because there exist dependencies on \Magento\Cms\Helper\Page
         $this->_page = $page;
         $this->_filterProvider = $filterProvider;
         $this->_pageFactory = $pageFactory;
+        parent::__construct($context, $data);
     }
 
     /**
      * Retrieve Page instance
      *
-     * @return \Magento\Cms\Model\Page
+     * @return CmsPage
      */
     public function getPage()
     {
@@ -94,11 +95,11 @@ class Page extends \Magento\Framework\View\Element\Template implements
     /**
      * Prepare breadcrumbs
      *
-     * @param \Magento\Cms\Model\Page $page
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @param CmsPage $page
+     * @throws LocalizedException
      * @return void
      */
-    protected function _addBreadcrumbs(\Magento\Cms\Model\Page $page)
+    protected function _addBreadcrumbs(CmsPage $page)
     {
         if ($this->_scopeConfig->getValue('web/default/show_cms_breadcrumbs', ScopeInterface::SCOPE_STORE)
             && ($breadcrumbsBlock = $this->getLayout()->getBlock('breadcrumbs'))
@@ -135,6 +136,6 @@ class Page extends \Magento\Framework\View\Element\Template implements
      */
     public function getIdentities()
     {
-        return [\Magento\Cms\Model\Page::CACHE_TAG . '_' . $this->getPage()->getId()];
+        return [Page::CACHE_TAG . '_' . $this->getPage()->getId()];
     }
 }

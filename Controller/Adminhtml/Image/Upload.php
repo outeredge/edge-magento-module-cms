@@ -2,32 +2,31 @@
 
 namespace OuterEdge\Page\Controller\Adminhtml\Image;
 
+use Magento\Backend\App\Action;
+use Magento\Catalog\Model\ImageUploader;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Exception\LocalizedException;
+use Exception;
 
-/**
- * Class Upload
- */
-class Upload extends \Magento\Backend\App\Action
+class Upload extends Action
 {
     /**
-     * Image uploader
-     *
-     * @var \Magento\Catalog\Model\ImageUploader
+     * @var ImageUploader
      */
     protected $imageUploader;
 
     /**
-     * Upload constructor.
-     *
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Catalog\Model\ImageUploader $imageUploader
+     * @param Context $context
+     * @param ImageUploader $imageUploader
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Catalog\Model\ImageUploader $imageUploader
+        Context $context,
+        ImageUploader $imageUploader
     ) {
-        parent::__construct($context);
         $this->imageUploader = $imageUploader;
+        parent::__construct($context);
     }
 
     /**
@@ -43,13 +42,13 @@ class Upload extends \Magento\Backend\App\Action
     /**
      * Upload file controller action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
      */
     public function execute()
     {
         $image = $this->getRequest()->getParam('image', null);
         if (null === $image) {
-            throw new \Magento\Framework\Exception\LocalizedException(
+            throw new LocalizedException(
                 __('There was an error uploading the file.')
             );
         }
@@ -64,7 +63,7 @@ class Upload extends \Magento\Backend\App\Action
                 'path' => $this->_getSession()->getCookiePath(),
                 'domain' => $this->_getSession()->getCookieDomain(),
             ];
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $result = ['error' => $e->getMessage(), 'errorcode' => $e->getCode()];
         }
         return $this->resultFactory->create(ResultFactory::TYPE_JSON)->setData($result);

@@ -20,9 +20,9 @@
         </arguments>
     </type>
     <type name="Magento\Cms\Controller\Adminhtml\Page\PostDataProcessor">
-        <plugin name="OuterEdge_Page::cmsPagePostDataProcessorPlugin" type="OuterEdge\Page\Controller\Adminhtml\Page\PostDataProcessorPlugin" sortOrder="1"/>
+        <plugin name="OuterEdge_Page::pagePostDataProcessorPlugin" type="OuterEdge\Page\Plugin\Cms\Controller\Adminhtml\Page\PostDataProcessor"/>
     </type>
     <type name="Magento\Cms\Model\Page\DataProvider">
-        <plugin name="OuterEdge_Page::cmsPageDataProviderPlugin" type="OuterEdge\Page\Model\Page\DataProviderPlugin" sortOrder="1"/>
+        <plugin name="OuterEdge_Page::pageDataProviderPlugin" type="OuterEdge\Page\Plugin\Cms\Model\Page\DataProvider"/>
     </type>
 </config>

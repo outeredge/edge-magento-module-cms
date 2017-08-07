@@ -1,10 +1,12 @@
 <?php
 
-namespace OuterEdge\Page\Controller\Adminhtml\Page;
+namespace OuterEdge\Page\Plugin\Cms\Controller\Adminhtml\Page;
 
-class PostDataProcessorPlugin
+use Magento\Cms\Controller\Adminhtml\Page\PostDataProcessor as PagePostDataProcessor;
+
+class PostDataProcessor
 {
-    public function beforeFilter(\Magento\Cms\Controller\Adminhtml\Page\PostDataProcessor $subject, array $rawData)
+    public function beforeFilter(PagePostDataProcessor $subject, array $rawData)
     {
         $data = $rawData;
         // @todo It is a workaround to prevent saving this data in cms model and it has to be refactored in future
