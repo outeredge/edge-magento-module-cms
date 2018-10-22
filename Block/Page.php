@@ -13,6 +13,12 @@ use Magento\Framework\Exception\LocalizedException;
 
 class Page extends Template implements IdentityInterface
 {
+
+    /**
+     * Cache tag
+     */
+    const CACHE_TAG = 'page';
+
     /**
      * @var FilterProvider
      */
